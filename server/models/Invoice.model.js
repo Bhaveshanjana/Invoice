@@ -81,7 +81,7 @@ const invoiceSchema = new mongoose.Schema({
       },
     },
   ],
-  totals: {
+  Totals: {
     subTotal: {
       type: Number,
     },
@@ -127,20 +127,14 @@ const invoiceSchema = new mongoose.Schema({
       type: String,
     },
   },
-  Terms: [
+  terms: [
     {
-      terms: [
-        {
-          type: String,
-        },
-      ],
-      additionalNotes: [
-        {
-          type: String,
-        },
-      ],
+      type: String,
     },
   ],
+  additionalNotes: {
+    type: String,
+  },
 });
 
 const invoiceModel = mongoose.model("Invoice", invoiceSchema);
