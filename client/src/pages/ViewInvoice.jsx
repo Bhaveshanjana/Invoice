@@ -18,6 +18,55 @@ import {
   AlertCircle,
 } from "lucide-react";
 
+// Child component to safely handle PDF generation only when data exists
+const PDFDownloadButton = ({ previewData, id }) => {
+  const [instance] = usePDF({
+    document: <InvoicePDF data={previewData} />,
+  });
+
+  useEffect(() => {
+    if (instance.error) {
+      console.error("PDF Generation Error:", instance.error);
+    }
+  }, [instance.error]);
+
+  if (instance.error) {
+    return (
+      <div className="flex flex-col items-end">
+        <span className="text-destructive flex items-center gap-1 text-xs font-semibold">
+          <AlertCircle className="h-3 w-3" />
+          PDF Error Triggered
+        </span>
+        <span className="text-destructive text-[10px] max-w-xs text-right mt-1 bg-destructive/10 p-1 rounded">
+          {instance.error.message || String(instance.error)}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <Button
+      onClick={() => {
+        if (instance.url) {
+          const link = document.createElement("a");
+          link.href = instance.url;
+          link.download = `invoice-${id}.pdf`;
+          link.click();
+        }
+      }}
+      className="gap-2 cursor-pointer"
+      disabled={instance.loading || !instance.url}
+    >
+      {instance.loading ? (
+        <Loader2 className="h-4 w-4 animate-spin" />
+      ) : (
+        <Download className="h-4 w-4" />
+      )}
+      {instance.loading ? "Preparing..." : "Download PDF"}
+    </Button>
+  );
+};
+
 const ViewInvoice = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -28,7 +77,9 @@ const ViewInvoice = () => {
   useEffect(() => {
     const fetchInvoice = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/invoices/${id}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/invoices/${id}`,
+        );
         setInvoice(response.data.invoice);
       } catch (err) {
         console.error("Error fetching invoice:", err);
@@ -42,28 +93,13 @@ const ViewInvoice = () => {
   }, [id]);
 
   // Transform invoice data for preview
-  const previewData = invoice ? {
-    ...invoice,
-    termsText: invoice.terms ? invoice.terms.join("\n") : "",
-    additionalNotes: invoice.additionalNotes || "",
-  } : null;
-
-  // Use the PDF hook for better error tracking
-  const [instance, updateInstance] = usePDF({ 
-    document: previewData ? <InvoicePDF data={previewData} /> : <div /> 
-  });
-
-  useEffect(() => {
-    if (previewData) {
-      updateInstance();
-    }
-  }, [invoice]);
-
-  useEffect(() => {
-    if (instance.error) {
-      console.error("PDF Generation Error:", instance.error);
-    }
-  }, [instance.error]);
+  const previewData = invoice
+    ? {
+        ...invoice,
+        termsText: invoice.terms ? invoice.terms.join("\n") : "",
+        additionalNotes: invoice.additionalNotes || "",
+      }
+    : null;
 
   if (loading) {
     return (
@@ -134,31 +170,9 @@ const ViewInvoice = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            {instance.error ? (
-              <span className="text-destructive flex items-center gap-1 text-xs">
-                <AlertCircle className="h-3 w-3" />
-                PDF Error
-              </span>
-            ) : (
-              <Button 
-                onClick={() => {
-                  if (instance.url) {
-                    const link = document.createElement('a');
-                    link.href = instance.url;
-                    link.download = `invoice-${id}.pdf`;
-                    link.click();
-                  }
-                }}
-                className="gap-2 cursor-pointer" 
-                disabled={instance.loading || !instance.url}
-              >
-                {instance.loading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Download className="h-4 w-4" />
-                )}
-                {instance.loading ? "Preparing..." : "Download PDF"}
-              </Button>
+            {/* Only mount the PDF button when previewData exists */}
+            {previewData && (
+              <PDFDownloadButton previewData={previewData} id={id} />
             )}
             <ThemeToggle />
           </div>
