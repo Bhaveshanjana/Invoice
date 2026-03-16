@@ -43,8 +43,6 @@ import {
   Loader2,
 } from "lucide-react";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4001";
-
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
@@ -93,7 +91,7 @@ const CreateInvoice = () => {
     }
     try {
       const response = await axios.post(
-        `${API_URL}/api/invoices`,
+        `${import.meta.env.VITE_API_URL}/api/invoices`,
         formattedData,
       );
       const invoiceId = response.data.newInvoice._id;

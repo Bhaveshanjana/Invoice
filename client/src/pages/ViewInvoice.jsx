@@ -18,8 +18,6 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4001";
-
 const ViewInvoice = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -30,7 +28,7 @@ const ViewInvoice = () => {
   useEffect(() => {
     const fetchInvoice = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/invoices/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/invoices/${id}`);
         setInvoice(response.data.invoice);
       } catch (err) {
         console.error("Error fetching invoice:", err);
