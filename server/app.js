@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
 import express from "express";
-import connectTodb from "./db.js";
+import connectTodb from "./db/db.js";
 
 import invoiceRoute from "./routes/invoice.route.js";
 
