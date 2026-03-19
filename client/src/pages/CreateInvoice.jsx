@@ -143,9 +143,6 @@ const CreateInvoice = () => {
       >
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-lg bg-primary">
-              <Receipt className="h-5 w-5 text-primary-foreground" />
-            </div>
             <h1 className="text-xl font-bold tracking-tight">InvoiceGen</h1>
           </div>
           <div className="flex items-center gap-2">
@@ -216,7 +213,7 @@ const CreateInvoice = () => {
                 value="header"
                 className="border rounded-lg overflow-hidden bg-card"
               >
-                <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
+                <AccordionTrigger className="px-6 py-4 hover:cursor-pointer hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-md bg-blue-500/10">
                       <FileText className="h-4 w-4 text-blue-500" />
@@ -224,7 +221,7 @@ const CreateInvoice = () => {
                     <span className="font-semibold">Invoice Details</span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
+                <AccordionContent className="px-6 pb-6 mt-4">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                     <div className="space-y-2">
                       <Label htmlFor="invoiceNo">Invoice Number *</Label>
@@ -268,7 +265,7 @@ const CreateInvoice = () => {
                 value="sender"
                 className="border rounded-lg overflow-hidden bg-card"
               >
-                <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
+                <AccordionTrigger className="px-6 py-4 cursor-pointer hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-md bg-emerald-500/10">
                       <Building2 className="h-4 w-4 text-emerald-500" />
@@ -276,7 +273,7 @@ const CreateInvoice = () => {
                     <span className="font-semibold">Billed By (Sender)</span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
+                <AccordionContent className="px-6 pb-6 mt-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                     <div className="space-y-2">
                       <Label htmlFor="senderName">Company Name *</Label>
@@ -336,7 +333,7 @@ const CreateInvoice = () => {
                 value="receiver"
                 className="border rounded-lg overflow-hidden bg-card"
               >
-                <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
+                <AccordionTrigger className="px-6 py-4 cursor-pointer hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-md bg-violet-500/10">
                       <User className="h-4 w-4 text-violet-500" />
@@ -344,7 +341,7 @@ const CreateInvoice = () => {
                     <span className="font-semibold">Billed To (Client)</span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
+                <AccordionContent className="px-6 pb-6 mt-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                     <div className="space-y-2">
                       <Label htmlFor="receiverName">Client Name *</Label>
@@ -404,7 +401,7 @@ const CreateInvoice = () => {
                 value="items"
                 className="border rounded-lg overflow-hidden bg-card"
               >
-                <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
+                <AccordionTrigger className="px-6 py-4 cursor-pointer hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-md bg-orange-500/10">
                       <Package className="h-4 w-4 text-orange-500" />
@@ -433,7 +430,7 @@ const CreateInvoice = () => {
                         exit="exit"
                         layout
                       >
-                        <Card className="mb-4 border-dashed">
+                        <Card className="mb-4 border-dashed mt-4">
                           <CardHeader className="pb-3">
                             <div className="flex items-center justify-between">
                               <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -561,7 +558,7 @@ const CreateInvoice = () => {
                 value="totals"
                 className="border rounded-lg overflow-hidden bg-card"
               >
-                <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
+                <AccordionTrigger className="px-6 py-4 cursor-pointer hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-md bg-pink-500/10">
                       <Receipt className="h-4 w-4 text-pink-500" />
@@ -569,7 +566,7 @@ const CreateInvoice = () => {
                     <span className="font-semibold">Totals & Discounts</span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
+                <AccordionContent className="px-6 pb-6 mt-4">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                     <div className="space-y-2">
                       <Label htmlFor="subTotal">Sub Total *</Label>
@@ -670,7 +667,7 @@ const CreateInvoice = () => {
                 value="bank"
                 className="border rounded-lg overflow-hidden bg-card"
               >
-                <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
+                <AccordionTrigger className="px-6 py-4 cursor-pointer hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-md bg-cyan-500/10">
                       <Landmark className="h-4 w-4 text-cyan-500" />
@@ -680,7 +677,7 @@ const CreateInvoice = () => {
                     </span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
+                <AccordionContent className="px-6 pb-6 mt-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                     <div className="space-y-2">
                       <Label htmlFor="accountName">Account Holder Name</Label>
@@ -746,7 +743,7 @@ const CreateInvoice = () => {
                 value="terms"
                 className="border rounded-lg overflow-hidden bg-card"
               >
-                <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
+                <AccordionTrigger className="px-6 py-4 cursor-pointer hover:no-underline hover:bg-muted/50 [&[data-state=open]]:bg-muted/50">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-md bg-amber-500/10">
                       <ScrollText className="h-4 w-4 text-amber-500" />
@@ -756,7 +753,7 @@ const CreateInvoice = () => {
                     </span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
+                <AccordionContent className="px-6 pb-6 mt-4">
                   <div className="space-y-4 pt-2">
                     <div className="space-y-2">
                       <Label htmlFor="terms">

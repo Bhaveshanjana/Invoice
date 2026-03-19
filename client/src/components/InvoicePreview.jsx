@@ -46,7 +46,7 @@ export function InvoicePreview({ data }) {
           </h1>
           <div className="mt-3 space-y-1 sm:text-sm text-xs text-gray-600">
             <div className="flex gap-2">
-              <span className="text-gray-500">Invoice#</span>
+              <span className="text-gray-500">Invoice #</span>
               <span className="font-medium text-gray-900">
                 {Header.invoiceNo || "—"}
               </span>
@@ -61,6 +61,9 @@ export function InvoicePreview({ data }) {
               <span className="text-gray-500">Due Date</span>
               <span className="font-medium text-gray-900">
                 {formatDate(Header.dueDate)}
+                 <span className="font-medium text-gray-900">
+                {Header.dueDate || "—"}
+              </span>
               </span>
             </div>
           </div>

@@ -152,7 +152,7 @@ const ViewInvoice = () => {
         animate={{ opacity: 1, y: 0 }}
         className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md"
       >
-        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-1 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
@@ -163,9 +163,6 @@ const ViewInvoice = () => {
               <ArrowLeft className="h-5 w-5" />
             </Button>
             <div className="flex items-center gap-2">
-              <div className="p-2 rounded-lg bg-primary">
-                <Receipt className="h-5 w-5 text-primary-foreground" />
-              </div>
               <h1 className="text-xl font-bold tracking-tight">InvoiceGen</h1>
             </div>
           </div>
@@ -188,7 +185,7 @@ const ViewInvoice = () => {
           className="mb-6"
         >
           <h2 className="text-2xl font-bold tracking-tight">
-            Invoice #{invoice.Header?.invoiceNo}
+            Invoice # {invoice.Header?.invoiceNo}
           </h2>
           <p className="text-muted-foreground mt-1">
             Your invoice has been generated successfully. Click "Download PDF"
