@@ -50,11 +50,11 @@ const PDFDownloadButton = ({ previewData, id }) => {
         if (instance.url) {
           const link = document.createElement("a");
           link.href = instance.url;
-          link.download = `invoice-${id}.pdf`;
+          link.download = `${previewData.Header.invoiceNo}-invoice.pdf`;
           link.click();
         }
       }}
-      className="gap-2 cursor-pointer"
+      className="gap-2 cursor-pointer text-xs"
       disabled={instance.loading || !instance.url}
     >
       {instance.loading ? (
@@ -150,10 +150,10 @@ const ViewInvoice = () => {
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md"
+        className="sticky top-0 z-50 border bg-background/20 backdrop-blur-xs max-w-[23rem] sm:max-w-2xl mx-auto translate-y-4 rounded-xl"
       >
         <div className="max-w-4xl mx-auto px-1 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Button
               variant="ghost"
               size="icon"
@@ -183,16 +183,7 @@ const ViewInvoice = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="mb-6"
-        >
-          <h2 className="text-2xl font-bold tracking-tight">
-            Invoice # {invoice.Header?.invoiceNo}
-          </h2>
-          <p className="text-muted-foreground mt-1">
-            Your invoice has been generated successfully. Click "Download PDF"
-            to save it.
-          </p>
-        </motion.div>
-
+        ></motion.div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -139,7 +139,7 @@ const CreateInvoice = () => {
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md"
+        className="sticky top-0 z-50 border bg-background/20 backdrop-blur-xs max-w-[22rem] sm:max-w-2xl mx-auto translate-y-4 rounded-xl"
       >
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -161,7 +161,7 @@ const CreateInvoice = () => {
                 <DialogHeader>
                   <DialogTitle>Invoice Preview</DialogTitle>
                 </DialogHeader>
-                <div className="bg-white rounded-lg p-2">
+                <div className="bg-white overflow-y-auto rounded-lg no-scrollbar p-2">
                   <InvoicePreview data={watchedValues} />
                 </div>
               </DialogContent>
@@ -178,12 +178,9 @@ const CreateInvoice = () => {
           animate="visible"
           variants={sectionVariants}
         >
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold tracking-tight">
-              Create Invoice
-            </h2>
+          <div className="mb-4 mt-8">
             <p className="text-muted-foreground mt-1">
-              Fill in the details below to generate your invoice
+              Fill the details below
             </p>
           </div>
         </motion.div>

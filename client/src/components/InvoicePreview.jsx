@@ -46,7 +46,7 @@ export function InvoicePreview({ data }) {
           </h1>
           <div className="mt-3 space-y-1 sm:text-sm text-xs text-gray-600">
             <div className="flex gap-2">
-              <span className="text-gray-500">Invoice #</span>
+              <span className="text-gray-500">Invoic No.</span>
               <span className="font-medium text-gray-900">
                 {Header.invoiceNo || "—"}
               </span>
@@ -60,10 +60,7 @@ export function InvoicePreview({ data }) {
             <div className="flex gap-2">
               <span className="text-gray-500">Due Date</span>
               <span className="font-medium text-gray-900">
-                {formatDate(Header.dueDate)}
-                 <span className="font-medium text-gray-900">
-                {Header.dueDate || "—"}
-              </span>
+                {formatDate(Header.dueDate || "—")}
               </span>
             </div>
           </div>
@@ -84,12 +81,12 @@ export function InvoicePreview({ data }) {
           </p>
           {Sender.GSTIN && (
             <p className="text-[10px] sm:text-xs text-gray-500 mt-2">
-              <span className="font-medium">GSTIN</span> {Sender.GSTIN}
+              <span className="font-medium text-black">GSTIN</span> {Sender.GSTIN}
             </p>
           )}
           {Sender.PAN && (
             <p className="text-[10px] sm:text-xs text-gray-500">
-              <span className="font-medium">PAN</span> {Sender.PAN}
+              <span className="font-medium text-black">PAN</span> {Sender.PAN}
             </p>
           )}
         </div>
@@ -105,12 +102,12 @@ export function InvoicePreview({ data }) {
           </p>
           {Receiver.GSTIN && (
             <p className="text-[10px] sm:text-xs text-gray-500 mt-2">
-              <span className="font-medium">GSTIN</span> {Receiver.GSTIN}
+              <span className="font-medium text-black">GSTIN</span> {Receiver.GSTIN}
             </p>
           )}
           {Receiver.PAN && (
             <p className="text-[10px] sm:text-xs text-gray-500">
-              <span className="font-medium">PAN</span> {Receiver.PAN}
+              <span className="font-medium text-black">PAN</span> {Receiver.PAN}
             </p>
           )}
         </div>
