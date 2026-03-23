@@ -5,3 +5,5 @@ server/node_modules/
 # Environment variables
 client/.env
 server/.env
+config.bat
+node_modules
