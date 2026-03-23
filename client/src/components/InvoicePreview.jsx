@@ -1,3 +1,5 @@
+import {QRCode} from "react-qr-code";
+
 const formatCurrency = (amount) => {
   if (!amount && amount !== 0) return "₹0";
   return `₹${Number(amount).toLocaleString("en-IN")}`;
@@ -32,6 +34,10 @@ export function InvoicePreview({ data }) {
     : typeof terms === "string"
       ? terms.split("\n").filter((t) => t.trim()) // If it's a string, split it
       : [];
+
+  const upiString = Bank?.upi
+    ? `upi://pay?pa=${Bank.upi.trim()}&pn=${encodeURIComponent(Bank.accountName || "Merchant")}&cu=INR`
+    : null;
 
   return (
     <div
@@ -81,7 +87,8 @@ export function InvoicePreview({ data }) {
           </p>
           {Sender.GSTIN && (
             <p className="text-[10px] sm:text-xs text-gray-500 mt-2">
-              <span className="font-medium text-black">GSTIN</span> {Sender.GSTIN}
+              <span className="font-medium text-black">GSTIN</span>{" "}
+              {Sender.GSTIN}
             </p>
           )}
           {Sender.PAN && (
@@ -102,7 +109,8 @@ export function InvoicePreview({ data }) {
           </p>
           {Receiver.GSTIN && (
             <p className="text-[10px] sm:text-xs text-gray-500 mt-2">
-              <span className="font-medium text-black">GSTIN</span> {Receiver.GSTIN}
+              <span className="font-medium text-black">GSTIN</span>{" "}
+              {Receiver.GSTIN}
             </p>
           )}
           {Receiver.PAN && (
@@ -243,46 +251,62 @@ export function InvoicePreview({ data }) {
       {/* Bottom Section: Bank + Totals side by side */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
         {/* Bank Details */}
-        <div>
-          <h3 className="text-xs sm:text-sm font-semibold text-violet-600 mb-3">
+        <div className="flex-1">
+          <h3 className="text-xs sm:text-sm font-semibold text-violet-600 mb-2">
             Bank & Payment Details
           </h3>
-          {Bank && (Bank.accountName || Bank.accountNumber) ? (
-            <div className="text-[10px] sm:text-xs space-y-1">
-              <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr]">
-                <span className="text-gray-500">A/C Name</span>
-                <span className="font-medium break-all">
-                  {Bank.accountName}
-                </span>
-              </div>
-              <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr]">
-                <span className="text-gray-500">A/C Number</span>
-                <span className="font-medium break-all">
-                  {Bank.accountNumber}
-                </span>
-              </div>
-              <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr]">
-                <span className="text-gray-500">IFSC</span>
-                <span className="font-medium">{Bank.ifsc}</span>
-              </div>
-              <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr]">
-                <span className="text-gray-500">Account Type</span>
-                <span className="font-medium">{Bank.accountType}</span>
-              </div>
-              <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr]">
-                <span className="text-gray-500">Bank</span>
-                <span className="font-medium">{Bank.bank}</span>
-              </div>
-              <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr]">
-                <span className="text-gray-500">UPI</span>
-                <span className="font-medium">{Bank.upi}</span>
-              </div>
+          <div className="flex items-center gap-4">
+            {/* Text details */}
+            <div className="space-y-1 sm:text-sm text-[10px] text-gray-800 flex-1">
+              {Bank && (Bank.accountName || Bank.accountNumber) ? (
+                <>
+                  <div className="text-[10px] sm:text-xs space-y-1">
+                    <div className="flex">
+                      <span className="w-20 text-gray-500">A/C Name</span>
+                      <span className="font-medium break-all">
+                        {Bank.accountName}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr]">
+                      <span className="text-gray-500">A/C Number</span>
+                      <span className="font-medium break-all">
+                        {Bank.accountNumber}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr]">
+                      <span className="text-gray-500">IFSC</span>
+                      <span className="font-medium">{Bank.ifsc}</span>
+                    </div>
+                    <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr]">
+                      <span className="text-gray-500">Account Type</span>
+                      <span className="font-medium">{Bank.accountType}</span>
+                    </div>
+                    <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr]">
+                      <span className="text-gray-500">Bank</span>
+                      <span className="font-medium">{Bank.bank}</span>
+                    </div>
+                    <div className="flex">
+                      <span className="w-20 text-gray-500">UPI</span>
+                      <span className="font-medium">{Bank.upi}</span>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <p className="text-[10px] sm:text-xs text-gray-400 italic">
+                  No bank details provided
+                </p>
+              )}
             </div>
-          ) : (
-            <p className="text-[10px] sm:text-xs text-gray-400 italic">
-              No bank details provided
-            </p>
-          )}
+            {/* QR code bloack */}
+            {upiString && (
+              <div className="-mt-12 -ml-4 p-1 border">
+                <QRCode value={upiString} size={90} level="L" />
+                <p className="text-[8px] text-center text-black mt-1">
+                  Scan to pay
+                </p>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Totals */}
